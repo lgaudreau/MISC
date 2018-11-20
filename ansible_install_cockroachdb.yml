@@ -1,0 +1,73 @@
+## Installs CockroachDB with Ansible.  I'm new to Ansible (and Linux for the most part), so keep that in mind while reading this, I'm sure there are much better ways of doing it without having to duplicate the variables.  
+## Assumes Ansible is installed and working, and two host groups are created - RoachMaster for the DB first node, and RoachNodes for additional nodes.
+
+---
+- hosts: RoachMaster
+  gather_facts: true
+  gather_subset: network
+  vars:
+    RoachURL: https://binaries.cockroachdb.com/cockroach-v2.1.0.linux-amd64.tgz
+    outPath: /home/user/
+    FileName: cockroach-v2.1.0.linux-amd64.tgz
+    copySource: /home/user/cockroach-v2.1.0.linux-amd64/cockroach
+    copyDest: /usr/local/bin
+  tasks:
+    - name: Download CockRoach
+      get_url:
+        url: "{{ RoachURL }}"
+        dest: "{{outPath}}"
+    - name: Extract Archive
+      unarchive:
+        src: "{{ outPath }}/{{FileName}}"
+        dest: "{{ outPath }}"
+        remote_src: yes
+    - name: copy to path
+      copy:
+        src: "{{ copySource }}"
+        dest: "{{ copyDest }}"
+        owner: root
+        group: root
+        mode: 0777
+        remote_src: yes
+
+     ## create sh script with it to install?
+    - name: start RoachDB Cluster as service
+      at:
+        command: "cockroach start --insecure --listen-addr={{ ansible_eth0.ipv4.address }}:25257"
+        count: 1
+        units: minutes
+
+- hosts: RoachNodes
+  gather_facts: true
+  gather_subset: network
+  vars:
+    RoachURL: https://binaries.cockroachdb.com/cockroach-v2.1.0.linux-amd64.tgz
+    outPath: /home/user/
+    FileName: cockroach-v2.1.0.linux-amd64.tgz
+    copySource: /home/user/cockroach-v2.1.0.linux-amd64/cockroach
+    copyDest: /usr/local/bin
+  tasks:
+    - name: Download CockRoach
+      get_url:
+        url: "{{ RoachURL }}"
+        dest: "{{ outPath }}"
+    - name: Extract Archive
+      unarchive:
+        src: "{{ outPath }}/{{ FileName }}"
+        dest: "{{ outPath }}"
+        remote_src: yes
+    - name: copy to path
+      copy:
+        src: "{{ copySource }}"
+        dest: "{{ copyDest }}"
+        owner: root
+        group: root
+        mode: 0777
+        remote_src: yes
+    - name: Join Cluster on other nodes
+      at:
+        command: "cockroach start --join={{ hostvars[groups.RoachMaster.0].ansible_default_ipv4.address }}:25257 --insecure --listen-addr={{ ansible_eth0.ipv4.address }}"
+        count: 1
+        units: minutes
+
+
