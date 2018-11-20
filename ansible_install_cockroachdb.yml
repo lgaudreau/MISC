@@ -1,4 +1,4 @@
-## Installs CockroachDB with Ansible.  I'm new to Ansible (and Linux for the most part), so keep that in mind while reading this, I'm sure there are much better ways of doing it without having to duplicate the variables.  
+## Installs CockroachDB with Ansible.  I'm new to Ansible (and Linux for the most part), so keep that in mind while reading this, I'm sure there are much better ways of doing it without having to duplicate the variables.
 ## Assumes Ansible is installed and working, and two host groups are created - RoachMaster for the DB first node, and RoachNodes for additional nodes.
 
 ---
@@ -27,7 +27,7 @@
         dest: "{{ copyDest }}"
         owner: root
         group: root
-        mode: 0777
+        mode: 0755
         remote_src: yes
 
      ## create sh script with it to install?
@@ -62,7 +62,7 @@
         dest: "{{ copyDest }}"
         owner: root
         group: root
-        mode: 0777
+        mode: 0755
         remote_src: yes
     - name: Join Cluster on other nodes
       at:
