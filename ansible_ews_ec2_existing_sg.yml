@@ -1,4 +1,4 @@
-## Create AWS EC2 Instance based on youtuber Yogesh Mehta
+## Create AWS EC2 Instance based on script by youtuber Yogesh Mehta
 
 - hosts: localhost
 
