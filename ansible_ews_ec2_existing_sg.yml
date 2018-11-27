@@ -1,5 +1,4 @@
 ## Create AWS EC2 Instance based on script by youtuber Yogesh Mehta
-#test
 
 - hosts: localhost
 
