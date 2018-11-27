@@ -9,7 +9,8 @@
         key_name: lg_key
         region: us-east-2
         instance_type: t2.micro
-        image: ami-0f65671a86f061fcd
+        image: ami-0f65671a86f061fcd #ubuntu free tier
+        #image: ami-01d1dfbacf429abed #win2016 free tier
         wait: yes
         wait_timeout: 500
         count: 1
