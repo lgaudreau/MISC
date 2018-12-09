@@ -14,7 +14,7 @@ GPIO.setup(PIR_PIN, GPIO.IN)
 
 mylcd = I2C_LCD_driver.lcd()
 
-print ("PIR Module Test (CTRL+C to exit)")
+print ("PIR Module Running (CTRL+C to exit)")
 time.sleep(2)
 print ("Ready")
 
