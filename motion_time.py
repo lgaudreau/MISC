@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 # Assumes a 2 row LCD connected on 27 and a PIR motion detector with the data connected on board pin 7 (gpio4).
-# Will show the current date and time if it detects motion, updating continuously.  If it does not detect motion after 20min, will turn the display off.
+# Will show the current date and time if it detects motion, checking every 20min but the display updats seconds/minutes in real time.  
+# If it does not detect motion after 20min, will turn the display off and check for further motion.  
 
 import RPi.GPIO as GPIO
 import time
