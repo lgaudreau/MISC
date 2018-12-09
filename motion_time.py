@@ -26,7 +26,7 @@ def main():
         if GPIO.input(PIR_PIN) == 0:
            mylcd.backlight(0)
         else:
-            print ("Motion Detected")
+            # print ("Motion Detected") # helpful while testing
             start_time = time.clock()
             check_time = start_time + 1200
             while time.clock() < check_time:
