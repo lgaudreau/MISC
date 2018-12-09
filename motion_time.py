@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Using a Raspberry Pi to detect motion and display the time & date.
-# Assumes a 2 row LCD connected on IC2Bus addres 0x27 and a PIR motion detector with the data connected on board pin 7 (gpio4).
+# Assumes a 2 row LCD connected on with I2C and a PIR motion detector with the data connected on board pin 7 (gpio4).
 # Will show the current date and time if it detects motion, checking every 20min but the display updats seconds/minutes in real time.  
 # If it does not detect motion after 20min, will turn the display off and check for further motion.  
 
