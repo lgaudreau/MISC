@@ -1,4 +1,4 @@
 # MISC
 Miscellaneous Scripts
 
-A collection of other things I'm working on but not anything specific.
+A collection of other things I'm working on.  Currently Raspberry Pi, AWS & Ansible related.
