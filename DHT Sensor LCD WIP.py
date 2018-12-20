@@ -3,7 +3,7 @@
 import pyowm
 import time
 
-logpath = "c:\users\lgaudreau\desktop\pylog.txt"
+logpath = "/home/user/Documents/pylog.txt"
 
 with open(logpath,"w") as log:
     log.write("OFF, %s, Begin Log\n" % time.strftime('%I:%M %p'))
