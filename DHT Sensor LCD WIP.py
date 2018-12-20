@@ -13,7 +13,7 @@ def WriteLog(state, time, temp):
         log.write("%s, %s, %s\n" % (state, time, temp))
 
 def GetTemp():
-    owm = pyowm.OWM('89152e1d59efc967dab012d7506138d2')  # You MUST provide a valid API key
+    owm = pyowm.OWM('12345')  # You MUST provide a valid Open Weather Map API key
     observation = owm.weather_at_place('Toronto,CA')
     w = observation.get_weather()
     temp = w.get_temperature('celsius')['temp']  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
