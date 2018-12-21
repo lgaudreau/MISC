@@ -50,7 +50,7 @@ def main():
            with open(logpath, 'r') as f:
                 lines = f.read().splitlines()
                 last_line = lines[-1]
-                if "ON" or "State" in last_line:
+                if ("ON" in last_line) or ("State" in last_line):
                     WriteLog("OFF",time.strftime('%I:%M:%S %p'),GetTemp())
         else:
             start_time = time.time()
@@ -59,7 +59,7 @@ def main():
             with open(logpath, 'r') as f:
                 lines = f.read().splitlines()
                 last_line = lines[-1]
-                if "OFF" or "State" in last_line:
+                if ("OFF" in last_line) or ("State" in last_line):
                     WriteLog("ON",time.strftime('%I:%M:%S %p'),curtemp)
             while time.time() < check_time:
                 humidity = str(int(round(sense.humidity)))
