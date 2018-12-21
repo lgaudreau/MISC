@@ -47,22 +47,12 @@ def main():
     while(1):
         if GPIO.input(PIR_PIN) == 0:
            mylcd.backlight(0)
-           
-           with open(logpath, 'r') as f:
-                lines = f.read().splitlines()
-                last_line = lines[-1]
-                if "ON" or "State" in last_line:
-                    WriteLog("OFF",time.strftime('%I:%M:%S %p'),GetTemp())
+           WriteLog("OFF",time.strftime('%I:%M:%S %p'),GetTemp())
         else:
-            # print ("Motion Detected") # helpful while testing
             start_time = time.time()
             check_time = start_time + 1200
             curtemp = GetTemp()
-            with open(logpath, 'r') as f:
-                lines = f.read().splitlines()
-                last_line = lines[-1]
-                if "OFF" or "State" in last_line:
-                    WriteLog("ON",time.strftime('%I:%M:%S %p'),curtemp)
+            WriteLog("ON",time.strftime('%I:%M:%S %p'),curtemp)
             while time.time() < check_time:
                 humidity = str(int(round(sense.humidity)))
                 temperature = str(int(round(sense.temperature)))
